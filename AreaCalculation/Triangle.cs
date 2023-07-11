@@ -13,8 +13,8 @@ namespace AreaCalculation
         private double c;
 
         public double A { get { return a; } set { a = value > 0 ? value : -value; } }
-        public double B { get { return b; } set { a = value > 0 ? value : -value; } }
-        public double C { get { return c; } set { a = value > 0 ? value : -value; } }
+        public double B { get { return b; } set { b = value > 0 ? value : -value; } }
+        public double C { get { return c; } set { c = value > 0 ? value : -value; } }
 
         public Triangle(double a, double b, double c) : base("Triangle")
         {
@@ -25,8 +25,6 @@ namespace AreaCalculation
                 Console.WriteLine("It is not a triangle - created default!");
                 throw new ArgumentOutOfRangeException("Not a triangle");
             }
-            
-            
         }
 
         private bool checkTriangle(double a, double b, double c)
@@ -48,6 +46,20 @@ namespace AreaCalculation
             area = Math.Sqrt(p * (p - A) * (p - B) * (p - C));
 
             return area;
+        }
+
+        public bool CheckRightTriangle()
+        {
+            List<double> sides = new List<double>() { A, B, C };
+
+            double longSide = sides.Max();
+
+            sides.Remove(longSide);
+
+            if (Math.Pow(longSide, 2) == (Math.Pow(sides[0], 2) + Math.Pow(sides[1], 2)))
+                return true;
+
+            return false;
         }
     }
 }

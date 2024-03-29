@@ -8,25 +8,20 @@ namespace AreaCalculation
 {
     public class Circle : Shape
     {
-        private double _radius;
+        public double Radius { get; }
 
-        public double Radius { 
-            get { return _radius; } 
-            set { _radius = value > 0 ? value : -value; } 
+        public Circle(double radius)
+        {
+            if (radius <= 0)
+                throw new ArgumentOutOfRangeException("радиус имеет отрицательное значение");
+            Radius = radius;
+            Square = GetArea();
         }
 
-        public Circle(double radius) : base("Circle")
+
+        protected override double GetArea()
         {
-            this.Radius = radius;
-        }
-
-        public override double GetArea()
-        {
-            double area = 0;
-
-            area = Math.PI * Radius * Radius;
-
-            return area;
+            return Math.PI * Radius * Radius;
         }
     }
 }

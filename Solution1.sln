@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AreaCalculationTest", "Area
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Элементы решения", "Элементы решения", "{4EBF3A4C-1A47-444D-94A2-AE68D6F4C371}"
 	ProjectSection(SolutionItems) = preProject
-		SQL.txt = SQL.txt
+		SQL.sql = SQL.sql
 	EndProjectSection
 EndProject
 Global

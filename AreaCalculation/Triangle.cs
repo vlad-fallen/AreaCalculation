@@ -8,55 +8,52 @@ namespace AreaCalculation
 {
     public class Triangle : Shape
     {
-        private double a;
-        private double b;
-        private double c;
+        public double FirstSide { get; }
+        public double SecondSide { get; }
+        public double ThirdSide { get; }
 
-        public double A { get { return a; } set { a = value > 0 ? value : -value; } }
-        public double B { get { return b; } set { b = value > 0 ? value : -value; } }
-        public double C { get { return c; } set { c = value > 0 ? value : -value; } }
+        public bool IsRightTriangle { get; private set; }
 
-        public Triangle(double a, double b, double c) : base("Triangle")
+        public Triangle(double a, double b, double c) 
         {
-            A = a; B = b; C = c;
+            if (a <= 0 || b <= 0 || c <= 0)
+                throw new ArgumentOutOfRangeException("сторона треугольника имеет отрицательное значение или равно нулю");
 
-            if (!checkTriangle(A, B, C))
-            {
-                Console.WriteLine("It is not a triangle - created default!");
+            FirstSide = a; SecondSide = b; ThirdSide = c;
+
+            if (!checkTriangle(FirstSide, SecondSide, ThirdSide))
                 throw new ArgumentOutOfRangeException("Not a triangle");
-            }
+
+            Square = GetArea();
+            IsRightTriangle = CheckRightTriangle();
         }
 
         private bool checkTriangle(double a, double b, double c)
         {
             if (a + b > c && a + c > b && b + c > a)
-            {
                 return true;
-            }
             
             return false;
         }
 
-        public override double GetArea()
+        protected override double GetArea()
         {
-            double area = 0;
-
-            double p = (A + B + C) / 2;
+            double p = (FirstSide + SecondSide + ThirdSide) / 2;
             
-            area = Math.Sqrt(p * (p - A) * (p - B) * (p - C));
-
-            return area;
+            return Math.Sqrt(p * (p - FirstSide) * (p - SecondSide) * (p - ThirdSide));
         }
 
-        public bool CheckRightTriangle()
+        protected bool CheckRightTriangle()
         {
-            List<double> sides = new List<double>() { A, B, C };
+            var a = FirstSide;
+            var b = SecondSide;
+            var c = ThirdSide;
 
-            double longSide = sides.Max();
-
-            sides.Remove(longSide);
-
-            if (Math.Pow(longSide, 2) == (Math.Pow(sides[0], 2) + Math.Pow(sides[1], 2)))
+            if (a * a == (b * b + c * c))
+                return true;
+            else if (b * b == (c * c + a * a))
+                return true;
+            else if (c * c == (a * a + b * b))
                 return true;
 
             return false;

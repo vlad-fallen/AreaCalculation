@@ -22,7 +22,7 @@ namespace AreaCalculation
             FirstSide = a; SecondSide = b; ThirdSide = c;
 
             if (!checkTriangle(FirstSide, SecondSide, ThirdSide))
-                throw new ArgumentOutOfRangeException("Not a triangle");
+                throw new ArgumentOutOfRangeException("длины сторон не соответствуют треугольнику");
 
             Square = GetArea();
             IsRightTriangle = CheckRightTriangle();

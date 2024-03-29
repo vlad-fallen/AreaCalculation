@@ -2,12 +2,10 @@
 {
     public abstract class Shape
     {
-        //private string _name;
         public double Square { get; protected set; }
 
-        public Shape(/*string name*/)
+        public Shape()
         {
-            //this._name = name;
         }
 
         protected abstract double GetArea();
